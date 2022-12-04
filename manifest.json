@@ -1,0 +1,14 @@
+{
+  "name": "YouTube Shortcuts",
+  "manifest_version": 3,
+  "version": "0.1",
+  "description": "Additional Shortcuts for YouTube",
+  "permissions": ["scripting"],
+  "icons": { "128": "128.png" },
+  "content_scripts": [
+    {
+      "matches": ["*://www.youtube.com/watch*"],
+      "js": ["content_scripts.js"]
+    }
+  ]
+}
