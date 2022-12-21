@@ -1,3 +1,4 @@
+// Toggle the autoplay button
 function toggleAutoplay() {
   const buttons = document.getElementsByClassName("ytp-autonav-toggle-button");
   for (const button of buttons) {
@@ -5,6 +6,7 @@ function toggleAutoplay() {
   }
 }
 
+// Scroll the page down by half
 function scrollHalfDown() {
   window.scrollBy({
     top: window.innerHeight / 2,
@@ -13,6 +15,7 @@ function scrollHalfDown() {
   });
 }
 
+// Scroll the page up by half
 function scrollHalfUp() {
   window.scrollBy({
     top: -window.innerHeight / 2,
@@ -21,6 +24,7 @@ function scrollHalfUp() {
   });
 }
 
+// Add the keydown listner to the page
 document.addEventListener("keydown", (e) => {
   if (e.code === "KeyA") {
     toggleAutoplay();
@@ -30,3 +34,19 @@ document.addEventListener("keydown", (e) => {
     scrollHalfUp();
   }
 });
+
+// ID of places with input boxes
+const inputBoxesId = ["search-form", "below"];
+
+// Set timeout to wait for elements to mount, especially the comment box
+setTimeout(() => {
+  // Add keydown handler for each input box to prevent event further propagation
+  inputBoxesId.forEach((id) => {
+    const element = document.getElementById(id);
+    if (element !== null) {
+      element.onkeydown = (e) => {
+        e.stopPropagation();
+      };
+    }
+  });
+}, 3000);
