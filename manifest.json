@@ -7,7 +7,7 @@
   "icons": { "128": "128.png" },
   "content_scripts": [
     {
-      "matches": ["*://www.youtube.com/watch*"],
+      "matches": ["*://www.youtube.com/*"],
       "js": ["content_scripts.js"]
     }
   ]
