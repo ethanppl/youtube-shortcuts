@@ -24,14 +24,18 @@ function scrollHalfUp() {
   });
 }
 
+const urlRegex = /http[s]*:\/\/www\.youtube\.com\/watch/;
+
 // Add the keydown listner to the page
 document.addEventListener("keydown", (e) => {
-  if (e.code === "KeyA") {
-    toggleAutoplay();
-  } else if (e.code === "KeyD") {
-    scrollHalfDown();
-  } else if (e.code === "KeyU") {
-    scrollHalfUp();
+  if (window.location.href.match(urlRegex) !== null) {
+    if (e.code === "KeyA") {
+      toggleAutoplay();
+    } else if (e.code === "KeyD") {
+      scrollHalfDown();
+    } else if (e.code === "KeyU") {
+      scrollHalfUp();
+    }
   }
 });
 
