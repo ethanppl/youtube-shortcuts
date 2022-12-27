@@ -42,15 +42,33 @@ document.addEventListener("keydown", (e) => {
 // ID of places with input boxes
 const inputBoxesId = ["search-form", "below"];
 
-// Set timeout to wait for elements to mount, especially the comment box
-setTimeout(() => {
-  // Add keydown handler for each input box to prevent event further propagation
-  inputBoxesId.forEach((id) => {
-    const element = document.getElementById(id);
-    if (element !== null) {
-      element.onkeydown = (e) => {
-        e.stopPropagation();
-      };
+// stopPropogation prevent keypress in input box to trigger the shortcuts
+// Not all element/component in the YouTube page load on the initial load
+// Recursive call to wait for element to render/mount to add stop propagation
+function addStopPropagation(inputBoxesId, round) {
+  const seconds = round > 8 ? 10000 : parseInt(1.33 ** round * 1000);
+
+  // Set timeout to wait for elements to mount, especially the comment box
+  setTimeout(() => {
+    // Element that cannot be found
+    let missedId = [];
+
+    // Add keydown handler for each input box to prevent event further propagation
+    inputBoxesId.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element !== null) {
+        element.onkeydown = (e) => {
+          e.stopPropagation();
+        };
+      } else {
+        missedId.push(id);
+      }
+    });
+
+    if (missedId.length > 0) {
+      addStopPropagation(missedId, round + 1);
     }
-  });
-}, 3000);
+  }, seconds);
+}
+
+addStopPropagation(inputBoxesId, 0);
