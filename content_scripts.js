@@ -31,11 +31,13 @@ document.addEventListener("keydown", (e) => {
   if (window.location.href.match(urlRegex) !== null) {
     if (e.code === "KeyA") {
       toggleAutoplay();
-    } else if (e.code === "KeyD") {
-      scrollHalfDown();
-    } else if (e.code === "KeyU") {
-      scrollHalfUp();
     }
+  }
+
+  if (e.code === "KeyD") {
+    scrollHalfDown();
+  } else if (e.code === "KeyU") {
+    scrollHalfUp();
   }
 });
 
